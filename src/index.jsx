@@ -1,12 +1,13 @@
 //Creating a small, working React App
 
 import { createRoot } from 'react-dom/client';
-
+import { MainView } from "./components/main-view/main-view";
 import "./index.scss";
+
 const MyFlixApplication = () => {   //<-- Will go on to be the main component
    return (
       <div className="my-flix">
-            <div>Good morning</div>
+            <MainView />
       </div>
    );
 };
