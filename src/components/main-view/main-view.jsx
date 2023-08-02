@@ -3,9 +3,9 @@ import { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card"
 import { MovieView } from "../movie-view/movie-view"
 
-//This is the first 'MainView' component
+//This is the first 'MainView' function component
 export const MainView = () => {     //The 'export' keyword exposes MainView so it can be used by other components. It is assigned a function that returns the code within
-   const [movies, setMovies] = useState([      //useState always takes two values, the first is the current 'state' and the second is the function to update the state
+   const [movies, setMovies] = useState([      //useState is a 'hook' and always takes two values, the first is the current 'state variable' (movies) and the second is the function to update the state (setMovies)
    {
       id: 1,
       title: "Tenet",
@@ -49,14 +49,14 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
       />);  //When onBackClick fires, it changes etselectedMovie back to null
    }
 
-   if (movies.length === 0) {     //currently, the 'movies' current state is the movies listed above
+   if (movies.length === 0) {     //currently, the 'movies' current state is the movie list above
       return <div>The list is empty</div>
    }
 
    return (
       <div>
-         {movies.map((movie) => (     //the map method assigns each elements in the 'movies' array to a piece of UI, which allows each title to be displayed
-            <MovieCard 
+         {movies.map((movie) => (     //the map method assigns each element in the 'movies' array to a piece of UI, which allows each title to be displayed
+            <MovieCard //<-- the beginning of the 'MovieCard' prop which will pass 'key', 'movie', and 'onMovieClick' to MovieCard
             key={movie.id}
             movie={movie}
             onMovieClick={(newSelectedMovie) => {    //onMovieClick is waiting to receive data from any movie-card that is clicked in order to change the setSelectedMovie

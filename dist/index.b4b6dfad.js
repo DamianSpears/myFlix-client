@@ -27374,7 +27374,8 @@ const MainView = ()=>{
         columnNumber: 14
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard //<-- the beginning of the 'MovieCard' prop
+            ), {
                 movie: movie,
                 onMovieClick: (newSelectedMovie)=>{
                     setSelectedMovie(newSelectedMovie);
@@ -27391,7 +27392,7 @@ const MainView = ()=>{
         columnNumber: 7
     }, undefined);
 };
-_s(MainView, "y/1GC+fYAnksR2FS089Kr9veuuk=");
+_s(MainView, "UWdDx1Rp8Maun74gt+oFCDxcsY0=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
