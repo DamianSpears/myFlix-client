@@ -16,14 +16,16 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
          .then((response) => response.json())
          .then((data) => {
             console.log(data);
-            const moviesFromApi = data.map((movie) => {  //data.docs.map searches through the API to return values for the defined keys in the return object below
+            const moviesFromApi = data.map((movie) => {  //data.map searches through the API to return values for the defined keys in the return object below
                return {
+                  Image: movie.ImagePath,
                   _id: movie.id,
                   Title: movie.Title,
                   Director: movie.Director,
+                  Description: movie.Description,
                   Genre: {
-                     Style: movie.Genre.Style,
-                     Description: movie.Genre.Description
+                     Style: movie.Genre[0].Style,
+                     Description: movie.Genre[0].Description
                   }
                }
             });
@@ -46,7 +48,7 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
             <MovieCard
                key={movie.Title}
                movie={movie}
-               onMovieClick={(newSelectedMovie) => {    //onMovieClick is waiting to receive data from any movie-card that is clicked in order to change the setSelectedMovie
+               onMovieClick={(newSelectedMovie) => {    //onMovieClick is waiting to receive data from any movie-card item that is clicked in order to change the setSelectedMovie
                   setSelectedMovie(newSelectedMovie);
                }} />   //the custom 'movie' prop has been added with a value of the movie object from the function to pass data to MovieCard (child component)
          ))}
