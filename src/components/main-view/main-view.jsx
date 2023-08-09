@@ -2,14 +2,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card"
 import { MovieView } from "../movie-view/movie-view"
+import { LoginView } from "../login-view/login-view"
 
 //This is the first 'MainView' component
 export const MainView = () => {     //The 'export' keyword exposes MainView so it can be used by other components. It is assigned a function that returns the code within
    const [movies, setMovies] = useState([]);    //useState always takes two values, the first is the current 'state' and the second is the function to update the state
    //the 'useState' hook allows you to create and initialize a new state for a component
    //useState returns destructured values to be used as variables. 'movies' is the array of movies, and 'setmovies' is a method that updates the 'movies' array
-
-   const [selectedMovie, setSelectedMovie] = useState(null); //Created second state variable to display the MovieView component upon a 'click'
+   const [selectedMovie, setSelectedMovie] = useState(null);   //Created second state variable to display the MovieView component upon a 'click'
+   const [user, setUser] = useState(null);   //This state variable has been added to keep track of whether a user is logged in or not
 
    useEffect(() => {
       fetch("https://pure-anchorage-69426-fa1526ceaf46.herokuapp.com/movies")   //fetch() returns a promise and needs a callback 'then()' in order to access it
@@ -32,6 +33,10 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
             setMovies(moviesFromApi);
          });
    }, []);       //<-- passing this empty array '[]' at the end tells useEffect that the callback does not depend on changes in states or props
+
+   if (!user) {   //This keeps the data from being displayed until the onLoggedIn attribute responds with an "ok"
+      return <LoginView onLoggedIn={(user) => setUser(user)} />;  //LoginView is receiving the 'onLoggedIn' attribute as a prop to use the callback within
+   }
 
    if (selectedMovie) {    //The if statement serves as a prop to transfer data to the MovieView.
       return (<MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)}  //MovieView receives two props when selectedMovie becomes true, revealing the movie information
