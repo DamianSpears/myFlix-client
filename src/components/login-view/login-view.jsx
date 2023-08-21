@@ -3,6 +3,7 @@
 
 import React from "react";
 import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
    const [username, setUsername] = useState("");
@@ -33,32 +34,34 @@ export const LoginView = ({ onLoggedIn }) => {
             }
          })
          .catch((e) => {
-            alert("Something ain't right");
+            alert("Something ain't right", e);
          });
    };
-   return (    //below is the onSubmit callback that applies the handleSubmit function
-      <form onSubmit={handleSubmit}>
-         <label>
-            Username:
-            <input
+   return (    //below is the React Bootstrap Form Component which takes the "username" and "password" state variables and uses them to login
+      <Form onSubmit={handleSubmit}>
+         <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
                type="text"  //'type' and 'onChange' are properties that will use the state variable "username" and "setUsername" from the useState Hook
                value={username}
                onChange={(e) => setUsername(e.target.value)}
                required
+               minLength="3"
             />
-         </label>
-         <label>
-            Password:
-            <input
+         </Form.Group>
+
+         <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
                type="password"
                value={password}
                onChange={(e) => setPassword(e.target.value)}
                required
             />
-         </label>
-         <button type="submit">
+         </Form.Group>
+         <Button variant="primary" type="submit">
             Submit
-         </button>
-      </form>
+         </Button>
+      </Form>
    );
 };
