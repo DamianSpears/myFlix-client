@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";   //since React Bootstrap was imported, we can now import Bootstrap components into the Movie cards
+import "./movie-card.scss";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
    return ( //This new Return statement incorporates React Bootstrap compnents "Card.Body" and "Card.Img" in order to create a new Movie Card with child components
-      <Card className="h-100">
+      <Card className="h-100 border-dark rounded bg-dark">
          <Card.Img variant="top" src={movie.ImagePath} />
-         <Card.Body>
+         <Card.Body className = "rounded-bottom">
             <Card.Title>{movie.Title}</Card.Title>
             <Card.Text>{movie.Director}</Card.Text>
             <Button onClick={() => onMovieClick(movie)} variant="link">

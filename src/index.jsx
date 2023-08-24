@@ -2,12 +2,13 @@
 
 import { createRoot } from 'react-dom/client';
 import { MainView } from "./components/main-view/main-view";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 import Container from "react-bootstrap/Container"
 
 const MyFlixApplication = () => {   //<-- Will go on to be the main component
    return (
-      <Container style={{border: "2px solid black"}}>
+      <Container>
             <MainView />
       </Container>
    );

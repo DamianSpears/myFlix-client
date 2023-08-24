@@ -1,27 +1,34 @@
 import "./movie-view.scss";
 import PropTypes from "prop-types";
+import './movie-view.scss';
 
 
 export const MovieView = ({ movie, onBackClick }) => {
    return (
-      <div>
+      <div className="movie-view-body">
          <div>
-            <img src={movie.ImagePath} />
+            <img src={movie.ImagePath} className="movie-image" />
          </div>
+         <p></p>
          <div>
             <span>Title: </span>
             <span>{movie.Title}</span>
          </div>
+         <p></p>
          <div>
             <span>Director: </span>
             <span>{movie.Director}</span>
          </div>
+         <p></p>
+         <div>
          <span>Description: </span>
          <span>{movie.Description}</span>
+         </div>
+         <p></p>
          <div>
             <span>Genre: </span>
             <span>{movie.Genre[0].Style}</span>
-            <br></br>
+            <p></p>
             <span>Genre Description: </span>
             <span>{movie.Genre[0].Description}</span>
          </div>

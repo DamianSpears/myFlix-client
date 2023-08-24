@@ -4,7 +4,6 @@ import { MovieCard } from "../movie-card/movie-card"
 import { MovieView } from "../movie-view/movie-view"
 import { LoginView } from "../login-view/login-view"
 import { SignupView } from "../signup-view/signup-view"
-import PropTypes from "prop-types";
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 
@@ -43,9 +42,8 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
                <SignupView />
             </Col>
          ) : selectedMovie ? (
-            <Col md={8} style={{ border: "1px solid black" }}>
+            <Col md={8}>
                <MovieView
-                  style={{ border: "1px solid green" }}
                   movie={selectedMovie}
                   onBackClick={() => setSelectedMovie(null)}  //MovieView receives two props when selectedMovie becomes true, revealing the movie information
                />
