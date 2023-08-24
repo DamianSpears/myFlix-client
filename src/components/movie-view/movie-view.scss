@@ -1,0 +1,20 @@
+$movie-view-bg-color: #557A95;
+$border-color: black;
+@import '~bootstrap/scss/bootstrap.scss';
+
+.back-button {
+   padding: 4px 12px 4px 12px;
+   color: whitesmoke;
+   background-color: dodgerblue;
+   border: none;
+   border-radius: 4px;
+ }
+
+ .movie-view-body {
+  background-color: $movie-view-bg-color;
+  padding: 2rem;
+ }
+
+ .movie-image {
+  border: 5px solid $border-color;
+ }

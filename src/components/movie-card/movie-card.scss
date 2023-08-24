@@ -1,0 +1,23 @@
+$card-body-bg-color: #557A95;
+$card-title-bg-color: white;
+@import '~bootstrap/scss/bootstrap.scss';
+
+.card {
+   &.h-100 {
+     .card-body {
+       background: $card-body-bg-color;
+ 
+       .card-title {
+         color: $card-title-bg-color;
+       }
+ 
+       .card-text {
+         color: $card-title-bg-color;
+       }
+
+       button {
+         color: $card-title-bg-color;
+       };
+     }
+   }
+ }
