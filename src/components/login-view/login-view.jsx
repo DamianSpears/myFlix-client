@@ -4,6 +4,7 @@
 import React from "react";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import "./login-view.scss";
 
 export const LoginView = ({ onLoggedIn }) => {
    const [username, setUsername] = useState("");
@@ -37,6 +38,7 @@ export const LoginView = ({ onLoggedIn }) => {
             alert("Something ain't right", e);
          });
    };
+   
    return (    //below is the React Bootstrap Form Component which takes the "username" and "password" state variables and uses them to login
       <Form onSubmit={handleSubmit}>
          <Form.Group controlId="formUsername">

@@ -2,14 +2,13 @@ import "./movie-view.scss";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import './movie-view.scss';
 
 
 export const MovieView = ({ movies }) => {
    const { movieTitle } = useParams(); // movieTitle is a URL parameter within the main-view component, useParams takes the URL request from MovieCard and applies it to the HTTP request
-   
+
    const movie = movies.find((movie) => movie.Title === movieTitle) //the movie variable serches through the array of movies and returns a matching movieId based off of the parameters provided.
-   ;
+      ;
    return (
       <div className="movie-view-body">
          <div>
