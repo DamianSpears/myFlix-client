@@ -66,7 +66,7 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
                   }
                />
 
-               <Route      //Allows a new user to login
+               <Route      //Allows a new user to signup
                   path="/login"
                   element={
                      <>
