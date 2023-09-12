@@ -7,10 +7,10 @@ import { SignupView } from "../signup-view/signup-view"
 import { NavigationBar } from "../navigation-bar/navigation-bar"
 import { ProfileView } from "../profile-view/profile-view"
 import { UpdateUser } from "../profile-view/update-user"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
+import { Col, Container, Row } from "react-bootstrap"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; //imports Routes, Route, Navigate and BrowserRouter
 import { FavoriteMovies } from "../favorite-movies/favorite-movies";
+import { MovieFilter } from "../movie-filter/movie-filter";
 
 //This is the parent 'MainView' component
 export const MainView = () => {     //The 'export' keyword exposes MainView so it can be used by other components. It is assigned a function that returns the code within
@@ -21,6 +21,7 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
    //useState returns destructured values to be used as variables. 'movies' is the array of movies, and 'setmovies' is a method that updates the 'movies' array
    const [user, setUser] = useState(storedUser ? storedUser : null);   //This state variable has been added to keep track of whether a user is logged in or not
    const [token, setToken] = useState(storedToken ? storedToken : null);
+   const [searchTerm, setSearchTerm] = useState("");
    const updatedUser = (user) => {
       setUser(user);
       localStorage.setItem("user", JSON.stringify(user));
@@ -38,6 +39,22 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
             setMovies(movies);
          });
    }, [token]); //<-- the dependency is now on "token", so fetch will update everytime token changes
+
+   const filterMovies = () => {
+      let filteredMovies = movies;
+
+      if (searchTerm) {
+         filteredMovies = filteredMovies.filter(
+            (movie) =>
+               movie.Genre[0].Style.includes(searchTerm) ||
+               movie.Director.includes(searchTerm) ||
+               movie.Title.includes(searchTerm)
+         );
+      }
+      return filteredMovies;
+   };
+
+   const filteredMovies = filterMovies();
 
    return (    //This new return statement essentially consolidates all of the previous if statements into one return in order to structure them with React components
       <BrowserRouter>
@@ -110,7 +127,7 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
                         ) : (
                            <Col md={8}>
                               <ProfileView user={user}
-                              token={token} />
+                                 token={token} />
                            </Col>
                         )}
                      </>
@@ -125,10 +142,10 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
                            <Navigate to="/login" replace />
                         ) : (
                            <Col md={8}>
-                              <UpdateUser 
-                              user={user}
-                              token={token}
-                              updatedUser={updatedUser} 
+                              <UpdateUser
+                                 user={user}
+                                 token={token}
+                                 updatedUser={updatedUser}
                               />
                            </Col>
                         )}
@@ -145,14 +162,14 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
                         ) : movies.length === 0 ? (
                            <Col> The list is empty! </Col>
                         ) : (
-                          <Col md={8}>
+                           <Col md={8}>
                               <FavoriteMovies
-                              movies={movies}
-                              user={user}
-                              token={token}
-                              updatedUser={updatedUser}
+                                 movies={movies}
+                                 user={user}
+                                 token={token}
+                                 updatedUser={updatedUser}
                               />
-                          </Col> 
+                           </Col>
                         )}
                      </>
                   }
@@ -164,27 +181,33 @@ export const MainView = () => {     //The 'export' keyword exposes MainView so i
                      <>
                         {!user ? (
                            <Navigate to="/login" replace />
-                        ) : movies.length === 0 ? (
+                        ) : filteredMovies.length === 0 ? (
                            <Col> The list is empty! </Col>
                         ) : (
                            <>
-                              {movies.map((movie) => (
-                                 <Col className="mb-4" key={movie.Title} md={3}>
-                                    <MovieCard 
-                                    movie={movie}
-                                    updatedUser={updatedUser}
-                                    token={token}
-                                    user={user} />
-                                 </Col>
-                              ))}
-                           </>
+                              <Container>
+                                 <MovieFilter
+                                    searchTerm={searchTerm}
+                                    setSearchTerm={setSearchTerm}
+                                 />
+                              </Container>
+                                 {filteredMovies.map((movie) => (
+                                    <Col className="mb-4" key={movie.Title} md={3}>
+                                       <MovieCard
+                                          movie={movie}
+                                          updatedUser={updatedUser}
+                                          token={token}
+                                          user={user} />
+                                    </Col>
+                                 ))}
+                              </>
 
-                        )}
-                     </>
-                  }
-               />
-            </Routes>
-         </Row>
-      </BrowserRouter>
-   );
+                           )}
+                           </>
+                     }
+                  />
+                     </Routes>
+               </Row>
+            </BrowserRouter>
+            );
 };
